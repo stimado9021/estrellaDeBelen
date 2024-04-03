@@ -1,0 +1,18 @@
+<?php
+require "bd/bd.php";
+$json =  file_get_contents("php://input");
+$data = json_decode($json, true);
+$id  = $data['id'];
+
+ $sql = "SELECT * FROM statusrole WHERE id_sta = '$id' "  ;
+    $query = $conexion->query($sql);
+    
+     $datos = array();    
+    while($r = $query->fetch_assoc()) {
+        $datos[] = [                        
+            "status"=>$r['status']       	
+        ];
+    }
+   
+    echo json_encode($datos);
+?>
